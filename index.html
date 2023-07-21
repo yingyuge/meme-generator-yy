@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://unpkg.com/htmx.org@1.9.3"></script>
+    <script src="https://unpkg.com/htmx.org@1.4.1/dist/ext/client-side-templates.js"></script>
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <title>HTMX Example</title>
+</head>
+<body>
+
+<!--
+         Step to have frontend and backend online
+
+            1. Change HTMX Use the url server.bulbt.com instead of localhost:8080 (replace every GET/POST request )
+            2. Put the HTMX file and the photos (if you have them downloaded and not use remote urls) into a new repository and publish them on Github
+                - You can do this also over IntelliJ: Git/Github/Share on Github
+                - Should be a public repository
+                - The main html file has to be named index.html
+                - index.html file should be in the root directoy (at the very top)
+            3. Go to Settings -> Pages -> Branch 'main'/root -> Save
+            4. Wait some minutes
+            5. The site will be online via https://<GITHUB_USERNAME>.github.io/<REPO>
+ -->
+<div hx-ext="client-side-templates">
+    <h2>Meme Generator</h2>
+    <div>
+        <div style="">
+            <button hx-get="https://server.bulbt.com/nate/memes-api/random-meme"
+                    mustache-template="conversionTemplate"
+                    hx-target="#greetingResponseTarget2">
+                Get random meme!!
+            </button>
+        </div>
+    </div>
+    <div id="greetingResponseTarget2">
+        Here will be the response ...
+    </div>
+
+    <template id="conversionTemplate">
+        <h2 style="color:green">{{title}} ( <span>🌟 {{upVotes}}</span> ) by <strong style="color: saddlebrown">{{creator}}</strong> </h2>
+        <img src="{{imageUrl}}"  height="300" alt="{{title}}">
+        <hr>
+    </template>
+</body>
+</html>
